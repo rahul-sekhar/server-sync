@@ -1,0 +1,15 @@
+# Local app root
+LOCAL_DOMAIN="domain.dev"
+LOCAL_PATH="/path/to/project"
+
+# Server details
+SERVER_DOMAIN="remote.com"
+SERVER_USER="user"
+SERVER_PATH="/home/user/path/to/project"
+
+# Directories to sync (space separated and relative to the app root)
+SYNC_DIRECTORIES="relativepath/to/dir1 relativepath/to/dir2"
+
+# WP CLI command
+WP_CLI_COMMAND="wp"
+

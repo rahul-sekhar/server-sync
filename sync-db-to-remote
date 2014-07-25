@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Load configuration
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$CURRENT_DIR/config"
+
+# Switch to app
+COMMAND="cd $LOCAL_PATH"
+echo $COMMAND
+eval $COMMAND
+
+# Export local db
+COMMAND="wp db export dump.sql"
+echo $COMMAND
+eval $COMMAND
+
+# Copy SQL file to server
+COMMAND="scp dump.sql $SERVER_USER@$SERVER_DOMAIN:$SERVER_PATH/dump.sql"
+echo $COMMAND
+eval $COMMAND
+
+# Import and replace domain
+COMMAND="ssh $SERVER_USER@$SERVER_DOMAIN 'cd $SERVER_PATH && $WP_CLI_COMMAND db import dump.sql && $WP_CLI_COMMAND search-replace http://$LOCAL_DOMAIN http://$SERVER_DOMAIN'"
+echo $COMMAND
+eval $COMMAND

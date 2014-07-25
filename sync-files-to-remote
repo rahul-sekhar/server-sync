@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Load configuration
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$CURRENT_DIR/config"
+
+# Switch to app
+COMMAND="cd $LOCAL_PATH"
+echo $COMMAND
+eval $COMMAND
+
+# Sync directories
+for SYNC_PATH in $SYNC_DIRECTORIES
+do
+  COMMAND="rsync -rtvuc --delete --progress $SYNC_PATH/ $SERVER_USER@$SERVER_DOMAIN:$SERVER_PATH/$SYNC_PATH/"
+  echo $COMMAND
+  eval $COMMAND
+done
