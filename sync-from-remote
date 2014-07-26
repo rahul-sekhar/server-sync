@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Load configuration
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+COMMAND="$CURRENT_DIR/sync-db-from-remote"
+echo $COMMAND
+eval $COMMAND
+
+COMMAND="$CURRENT_DIR/sync-files-from-remote"
+echo $COMMAND
+eval $COMMAND
