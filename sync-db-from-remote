@@ -19,7 +19,7 @@ COMMAND="scp $SERVER_USER@$SERVER_DOMAIN:$SERVER_PATH/dump.sql dump.sql"
 echo $COMMAND
 eval $COMMAND
 
-# Import and replace domain
-COMMAND="wp db import dump.sql && wp search-replace http://$SERVER_DOMAIN http://$LOCAL_DOMAIN"
+# Backup database, import new database and replace domain
+COMMAND="wp db export backup.sql && wp db import dump.sql && wp search-replace http://$SERVER_DOMAIN http://$LOCAL_DOMAIN"
 echo $COMMAND
 eval $COMMAND
